@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_humidity_tree" model="ir.ui.view">
+            <field name="name">vit.humidity.tree</field>
+            <field name="model">vit.humidity</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Humidity">
+                    <field name="sensor_id"/>
+                    <field name="read_date"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_humidity_form" model="ir.ui.view">
+            <field name="name">vit.humidity.form</field>
+            <field name="model">vit.humidity</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Humidity" version="7.0">
+                    <header>
+
+                    </header>
+
+                    <sheet>
+                        <group colspan="4">
+                            <field name="sensor_id"/>
+                            <field name="read_date"/>
+                            <field name="value"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_humidity_search" model="ir.ui.view">
+            <field name="name">vit.humidity.search</field>
+            <field name="model">vit.humidity</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Humidity">
+                    <field name="value" select="True"/>
+                    <field name="sensor_id"/>
+                    <field name="read_date"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Sensor" icon="terp-camera_test" name="group_by_sensor_id" context="{'group_by':'sensor_id'}"/>
+                        <filter string="Date Time" icon="terp-camera_test" name="group_by_read_date" context="{'group_by':'read_date'}"/>
+                    </group>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="view_humidity_graph" model="ir.ui.view">
+            <field name="name">vit.humidity</field>
+            <field name="model">vit.humidity</field>
+            <field name="arch" type="xml">
+                <graph string="humidity" type="line">
+                    <field name="read_date"/>
+                    <field name="value" />
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_humidity_view">
+            <field name="name">Humidity</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.humidity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="view_humidity_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_humidity_view_form">
+            <field name="act_window_id" ref="act_open_humidity_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_humidity_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_humidity_view_tree">
+            <field name="act_window_id" ref="act_open_humidity_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_humidity_tree"/>
+        </record>
+
+        <menuitem id="menu_humidity"
+                  parent="menu_sensor_data"
+                  sequence="20"
+                  action="act_open_humidity_view"/>
+        
+    
+    </data>
+</openerp>

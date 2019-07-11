@@ -1,0 +1,25 @@
+<openerp>
+	<data>
+
+		<menuitem id="menu_top_sensor"
+				  name="Sensor"
+				  sequence="20"
+				  web_icon="vit_sensor,static/description/icon.png"
+
+		/>
+
+		<menuitem id="menu_sensor_data"
+				  parent="menu_top_sensor"
+				  name="Reading Data"
+				  sequence="100"
+		/>
+
+		<menuitem id="menu_sensor_master"
+				  parent="menu_top_sensor"
+				  name="Master Data"
+				  sequence="100"
+		/>
+
+
+	</data>
+</openerp>

@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"sensor_manager","sensor_manager","model_vit_sensor","vit_sensor.group_sensor_manager",1,1,1,1
+"sensor_user","sensor_manager","model_vit_sensor","vit_sensor.group_sensor_user",1,1,1,0
+"reading_manager","reading_manager","model_vit_reading","vit_sensor.group_sensor_manager",1,1,1,1
+"reading_user","reading_manager","model_vit_reading","vit_sensor.group_sensor_user",1,1,1,0

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_temperature_tree" model="ir.ui.view">
+            <field name="name">vit.temperature.tree</field>
+            <field name="model">vit.temperature</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Temperature">
+                    <field name="sensor_id"/>
+                    <field name="read_date"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_temperature_form" model="ir.ui.view">
+            <field name="name">vit.temperature.form</field>
+            <field name="model">vit.temperature</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Temperature" version="7.0">
+                    <header>
+
+                    </header>
+
+                    <sheet>
+                        <group colspan="4">
+                            <field name="sensor_id"/>
+                            <field name="read_date"/>
+                            <field name="value"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_temperature_search" model="ir.ui.view">
+            <field name="name">vit.temperature.search</field>
+            <field name="model">vit.temperature</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Temperature">
+                    <field name="value" select="True"/>
+                    <field name="sensor_id"/>
+                    <field name="read_date"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Sensor" icon="terp-camera_test" name="group_by_sensor_id" context="{'group_by':'sensor_id'}"/>
+                        <filter string="Date Time" icon="terp-camera_test" name="group_by_read_date" context="{'group_by':'read_date'}"/>
+                    </group>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="view_temperature_graph" model="ir.ui.view">
+            <field name="name">vit.temperature</field>
+            <field name="model">vit.temperature</field>
+            <field name="arch" type="xml">
+                <graph string="temperature" type="line">
+                    <field name="read_date"/>
+                    <field name="value" />
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_temperature_view">
+            <field name="name">Temperature</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.temperature</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="view_temperature_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_temperature_view_form">
+            <field name="act_window_id" ref="act_open_temperature_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_temperature_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_temperature_view_tree">
+            <field name="act_window_id" ref="act_open_temperature_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_temperature_tree"/>
+        </record>
+
+        <menuitem id="menu_temperature"
+                  parent="menu_sensor_data"
+                  sequence="20"
+                  action="act_open_temperature_view"/>
+    
+    </data>
+</openerp>
